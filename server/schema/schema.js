@@ -1,10 +1,16 @@
 const graphql = require("graphql");
 const { GraphQLObjectType, GraphQLString, GraphQLSchema, GraphQLID } = graphql;
 const _ = require("lodash");
+//dummy data
 const books = [
   { name: "name of the wind", genre: "Fantasy", id: "1" },
   { name: "the final Empire ", genre: "Fantasy", id: "2" },
   { name: "The Long Earth", genre: "Sci-Fi", id: "3" },
+];
+const Authors = [
+  { name: "patrik rothufs", age: 44, id: "1" },
+  { name: "brandon senderson", age: 42, id: "2" },
+  { name: "Terry Pratchett", age: 66, id: "3" },
 ];
 
 const BookType = new GraphQLObjectType({
