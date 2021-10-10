@@ -5,13 +5,22 @@ const {
   GraphQLSchema,
   GraphQLID,
   GraphQLInt,
+  GraphQLList,
 } = graphql;
 const _ = require("lodash");
 //dummy data
 const books = [
   { name: "name of the wind", genre: "Fantasy", id: "1", authorid: "1" },
   { name: "the final Empire ", genre: "Fantasy", id: "2", authorid: "2" },
-  { name: "The Long Earth", genre: "Sci-Fi", id: "3", authorid: "3" },
+  { name: "The fault in our star", genre: "Romance", id: "3", authorid: "2" },
+  {
+    name: "The seven habits ofhighly effective people",
+    genre: "Selfdev",
+    id: "4",
+    authorid: "3",
+  },
+  { name: "atomic habits", genre: "selfDev", id: "5", authorid: "1" },
+  { name: "the way of successs", genre: "selfdev", id: "6", authorid: "3" },
 ];
 const Authors = [
   { name: "patrik rothufs", age: 44, id: "1" },
@@ -40,6 +49,12 @@ const Author = new GraphQLObjectType({
     id: { type: GraphQLID },
     age: { type: GraphQLInt },
     name: { type: GraphQLString },
+    books: {
+      type: new GraphQLList(BookType),
+      resolve(parent, args) {
+        return _.filter(books, { authorid: parent.id });
+      },
+    },
   }),
 });
 
