@@ -1,4 +1,14 @@
+/* ----------------------------- import packages ---------------------------- */
 const graphql = require("graphql");
+const _ = require("lodash");
+/* -------------------------------------------------------------------------- */
+/*                           import mongoose schemas                          */
+/* -------------------------------------------------------------------------- */
+const BookSchema = require("../models/book");
+const AuthorSchema = require("../models/author");
+/* -------------------------------------------------------------------------- */
+/*                           end of import                       */
+/* -------------------------------------------------------------------------- */
 const {
   GraphQLObjectType,
   GraphQLString,
@@ -7,8 +17,8 @@ const {
   GraphQLInt,
   GraphQLList,
 } = graphql;
-const _ = require("lodash");
-//dummy data
+
+//!dummy data
 const books = [
   { name: "name of the wind", genre: "Fantasy", id: "1", authorid: "1" },
   { name: "the final Empire ", genre: "Fantasy", id: "2", authorid: "2" },
@@ -57,7 +67,7 @@ const Author = new GraphQLObjectType({
     },
   }),
 });
-
+//Querys
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
   fields: () => ({
@@ -90,7 +100,28 @@ const RootQuery = new GraphQLObjectType({
     },
   }),
 });
+//Mutations
+const Mutations = new GraphQLObjectType({
+  name: "Mutation",
+  fields: {
+    addAuthor: {
+      type: Author,
+      args: {
+        name: { type: GraphQLString },
+        age: { type: GraphQLInt },
+      },
+      resolve(parent, args) {
+        let author = new AuthorSchema({
+          name: args.name,
+          age: args.age,
+        });
+        return author.save();
+      },
+    },
+  },
+});
 
 module.exports = new GraphQLSchema({
   query: RootQuery,
+  mutation: Mutations,
 });
