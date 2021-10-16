@@ -6,6 +6,7 @@ const _ = require("lodash");
 /* -------------------------------------------------------------------------- */
 const BookSchema = require("../models/book");
 const AuthorSchema = require("../models/author");
+const author = require("../models/author");
 /* -------------------------------------------------------------------------- */
 /*                           end of import                       */
 /* -------------------------------------------------------------------------- */
@@ -47,7 +48,8 @@ const BookType = new GraphQLObjectType({
     author: {
       type: Author,
       resolve(parent, args) {
-        return _.find(Authors, { id: parent.authorid });
+        // return _.find(Authors, { id: parent.authorid });
+        return AuthorSchema.findById(parent.authorId);
       },
     },
   }),
@@ -62,7 +64,8 @@ const Author = new GraphQLObjectType({
     books: {
       type: new GraphQLList(BookType),
       resolve(parent, args) {
-        return _.filter(books, { authorid: parent.id });
+        // return _.filter(books, { authorid: parent.id });
+        return BookSchema.find({ authorId: parent.id });
       },
     },
   }),
@@ -76,26 +79,30 @@ const RootQuery = new GraphQLObjectType({
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
         // code to get data from db /other source
-        return _.find(books, { id: args.id });
+        // return _.find(books, { id: args.id });
+        return BookSchema.findById(args.id);
       },
     },
     author: {
       type: Author,
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
-        return _.find(Authors, { id: args.id });
+        // return _.find(Authors, { id: args.id });
+        return AuthorSchema.findById(args.id);
       },
     },
     books: {
       type: new GraphQLList(BookType),
       resolve(parent, args) {
-        return books;
+        // return books;
+        return BookSchema.find({});
       },
     },
     authors: {
       type: new GraphQLList(Author),
       resolve(parent, args) {
-        return Authors;
+        // return Authors;
+        return AuthorSchema.find({});
       },
     },
   }),
