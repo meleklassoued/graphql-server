@@ -1,11 +1,6 @@
 import React from "react";
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  useQuery,
-  gql,
-} from "@apollo/client";
+import { ApolloProvider } from "@apollo/client";
+import ApolloClient from "apollo-boost";
 /* -------------------------------------------------------------------------- */
 /*                              import components                             */
 /* -------------------------------------------------------------------------- */
