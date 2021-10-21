@@ -5,6 +5,7 @@ import ApolloClient from "apollo-boost";
 /*                              import components                             */
 /* -------------------------------------------------------------------------- */
 import Booklist from "./components/Booklist";
+import AddBook from "./components/AddBook";
 
 /* -------------------------------------------------------------------------- */
 /*                              import components                             */
@@ -22,6 +23,7 @@ function App() {
         <div className='App'>
           <h1> Melek's Reading List</h1>
           <Booklist />
+          <AddBook />
         </div>
       </ApolloProvider>
     </>
