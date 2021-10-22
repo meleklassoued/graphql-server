@@ -1,9 +1,29 @@
 import React from "react";
+import { useState } from "react";
 import { useQuery } from "@apollo/client";
 /* ------------------------------ import QUERY ------------------------------ */
 import { getAuthrosQuery } from "../graphql/Queries/query";
 /* ------------------------- FINISH IMPORTING QUERY ------------------------- */
 function AddBook() {
+  /* ----------------------------------  --------------------------------- */
+  const Data = Object.freeze({
+    name: "",
+    genre: "",
+    authorId: "",
+  });
+  const [State, setState] = useState(Data);
+
+  const handleChange = (e) => {
+    setState({
+      ...State,
+      [e.target.name]: e.target.value.trim(),
+    });
+  };
+  const SubmitForm = (e) => {
+    e.preventDefault();
+    console.log(State);
+  };
+
   const DisplayAuthors = () => {
     let { loading, error, data } = useQuery(getAuthrosQuery);
     if (loading) return <option disabled>Loading ...</option>;
@@ -19,20 +39,20 @@ function AddBook() {
 
   return (
     <div>
-      <form id='add-book'>
+      <form id='add-book' onSubmit={SubmitForm}>
         <div className='field'>
           <label>Book Name: </label>
-          <input type='text' />
+          <input name='name' type='text' onChange={handleChange} />
         </div>
 
         <div className='field'>
           <label> Genre </label>
-          <input type='text' />
+          <input name='genre' type='text' onChange={handleChange} />
         </div>
 
         <div className='field'>
           <label> Author:</label>
-          <select>
+          <select name='authorId' onChange={handleChange}>
             <option>select author</option>
             {DisplayAuthors()}
           </select>
