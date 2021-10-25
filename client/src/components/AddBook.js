@@ -1,9 +1,11 @@
 import React from "react";
 import { useState } from "react";
-import { useQuery } from "@apollo/client";
-/* ------------------------------ import QUERY ------------------------------ */
+import { useMutation, useQuery } from "@apollo/client";
+/* ------------------------------ import QUERY and mutations ------------------------------ */
 import { getAuthrosQuery } from "../graphql/Queries/query";
-/* ------------------------- FINISH IMPORTING QUERY ------------------------- */
+import addBookMutations from "../graphql/Mutattions/mutations";
+
+/* ------------------------- FINISH IMPORTING QUERY and Mutations ------------------------- */
 function AddBook() {
   /* ----------------------------------  --------------------------------- */
   const Data = Object.freeze({
@@ -12,6 +14,7 @@ function AddBook() {
     authorId: "",
   });
   const [State, setState] = useState(Data);
+  const [addBook] = useMutation(addBookMutations);
 
   const handleChange = (e) => {
     setState({
@@ -21,6 +24,14 @@ function AddBook() {
   };
   const SubmitForm = (e) => {
     e.preventDefault();
+    addBook({
+      variables: {
+        name: State.name,
+        genre: State.genre,
+        authorId: State.authorId,
+      },
+    });
+
     console.log(State);
   };
 
