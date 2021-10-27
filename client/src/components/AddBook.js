@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 /* ------------------------------ import QUERY and mutations ------------------------------ */
-import { getAuthrosQuery } from "../graphql/Queries/query";
+import { getBooksList,getAuthrosQuery } from "../graphql/Queries/query";
 import addBookMutations from "../graphql/Mutattions/mutations";
 
 /* ------------------------- FINISH IMPORTING QUERY and Mutations ------------------------- */
@@ -30,6 +30,7 @@ function AddBook() {
         genre: State.genre,
         authorId: State.authorId,
       },
+      refetchQueries: [{ query: getBooksList }],
     });
 
     console.log(State);

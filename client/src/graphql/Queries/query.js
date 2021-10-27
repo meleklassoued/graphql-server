@@ -16,4 +16,4 @@ const getBooksList = gql`
     }
   }
 `;
-export { getAuthrosQuery, getBooksList };
+export { getBooksList, getAuthrosQuery };
