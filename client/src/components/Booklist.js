@@ -7,7 +7,7 @@ import BookDetail from "./BookDetail";
 /* ------------------------------ finish import QUERY ------------------------------ */
 
 function Booklist() {
-  const [Selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState([]);
   const { loading, error, data } = useQuery(getBooksList);
   if (loading) return "loading";
   if (error) return `Error ${error.message}`;
@@ -25,7 +25,7 @@ function Booklist() {
           </li>
         ))}
       </ul>
-      <BookDetail BookId={Selected}></BookDetail>
+      <BookDetail BookId={selected}></BookDetail>
     </div>
   );
 }
