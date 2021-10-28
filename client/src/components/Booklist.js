@@ -1,6 +1,7 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
 import { useState } from "react";
+import "../index.css";
 /* ------------------------------ import QUERY ------------------------------ */
 import { getBooksList } from "../graphql/Queries/query";
 import BookDetail from "./BookDetail";

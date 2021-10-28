@@ -1,6 +1,7 @@
 import React from "react";
 import { ApolloProvider } from "@apollo/client";
 import ApolloClient from "apollo-boost";
+import "../src/index.css";
 /* -------------------------------------------------------------------------- */
 /*                              import components                             */
 /* -------------------------------------------------------------------------- */
@@ -20,7 +21,7 @@ function App() {
   return (
     <>
       <ApolloProvider client={client}>
-        <div className='App'>
+        <div id='main'>
           <h1> Melek's Reading List</h1>
           <Booklist />
           <AddBook />
