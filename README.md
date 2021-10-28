@@ -1,4 +1,4 @@
-# graphql-server:
+# BookList:
 
 React :
 Getting Started with Create React App
@@ -62,5 +62,5 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 
 
 
-backend server:
+#backend server:
 noodemon app to run the backend 
